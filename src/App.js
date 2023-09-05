@@ -3,10 +3,50 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
 import Img from "./assets/gratitude.jpg";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
+  const toast_delete = () => {
+    return toast.success("Not - Silindi !", {
+      position: "top-right",
+      autoClose: 300,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  const toast_add = () => {
+    return toast.success("Yeni Not Eklendi !", {
+      position: "top-right",
+      autoClose: 300,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={300}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
       <div className="bg-white shadow mb-8">
         <nav className="flex gap-2 justify-center max-w-xl mx-auto text-zinc-500">
           <NavLink
@@ -56,13 +96,13 @@ export default function App() {
         </Route>
         <Route path="/yeni-not">
           <div className="max-w-md sm:max-w-4xl mx-auto px-4 pb-8">
-            <PostForm />
+            <PostForm toast_add = {toast_add}/>
           </div>
         </Route>
 
         <Route path="/notlar">
           <div className="max-w-md mx-auto px-4 pb-8">
-            <PostList />
+            <PostList toast_delete={toast_delete} />
           </div>
         </Route>
       </Switch>
